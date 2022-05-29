@@ -5,15 +5,15 @@ const { jwt_secret } = require('../config/config.json')['development']
 const { Op } = Sequelize
 
 const UserController = {
-    async create(req,res){
+    async create(req,res,next){
         try {
             req.body.role = "user";
             const password = bcrypt.hashSync(req.body.password,10);
             const user = await User.create({...req.body,password:password});
             res.status(201).send({message:"User created",user});
         } catch (error) {
-            console.error(error)
-            res.send(error)
+            error.origin = 'User'
+            next(error)
         }
     },
     async login(req,res){
@@ -55,5 +55,5 @@ const UserController = {
         }
     }
 }
-//asd
+
 module.exports = UserController
