@@ -1,5 +1,7 @@
-const { User,Model } = require('../models/index');
+const { User,Model,Token } = require('../models/index');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const { jwt_secret } = require('../config/config.json')['development']
 
 const UserController = {
     async create(req,res){
@@ -28,7 +30,9 @@ const UserController = {
             if(!isMatch){
                 return res.status(400).send({message:"User or password incorrect"})
             }
-            res.send({message:"User logged successful",user})
+            token = jwt.sign({id:user.id},jwt_secret)
+            Token.create({token,UserId:user.id})
+            res.send({message:"User logged successful" + user.name,user,token})
         } catch (error) {
             console.error(error)
         }
