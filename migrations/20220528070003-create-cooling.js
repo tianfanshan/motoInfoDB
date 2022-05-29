@@ -8,7 +8,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      cooling: {
+      type: {
         type: Sequelize.STRING
       },
       createdAt: {

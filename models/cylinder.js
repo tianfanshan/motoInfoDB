@@ -14,7 +14,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Cylinder.init({
-    cylinder: DataTypes.STRING
+    cylinder: DataTypes.STRING,
+    type: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Cylinder',

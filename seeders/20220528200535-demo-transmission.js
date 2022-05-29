@@ -2,13 +2,17 @@
 
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.bulkInsert('Coolings',[
+    await queryInterface.bulkInsert('Transmissions',[
       {
-        type:'air cooling',
+        type:'shaft transmission',
         createdAt: new Date(),
         updatedAt: new Date()
       },{
-        type:'liquid cooling',
+        type:'chain transmission',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },{
+        type:'belt transmission',
         createdAt: new Date(),
         updatedAt: new Date()
       }

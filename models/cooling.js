@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Cooling.init({
-    cooling: DataTypes.STRING
+    type: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Cooling',

@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Transmission.init({
-    transmission: DataTypes.STRING
+    type: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Transmission',

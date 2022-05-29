@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Model.init({
     model: DataTypes.STRING,
-    year: DataTypes.DATE
+    year: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Model',
