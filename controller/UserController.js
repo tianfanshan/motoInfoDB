@@ -1,7 +1,8 @@
-const { User,Model,Token } = require('../models/index');
+const { User,Model,Token, Sequelize } = require('../models/index');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { jwt_secret } = require('../config/config.json')['development']
+const { Op } = Sequelize
 
 const UserController = {
     async create(req,res){
@@ -37,6 +38,22 @@ const UserController = {
             console.error(error)
         }
     },
+    async logout(req,res){
+        try {
+            await Token.destroy({
+                where:{
+                    [Op.and]:[
+                        {UserId:req.user.id},
+                        {token:req.headers.authorization}
+                    ]
+                }
+            });
+            res.send({message:"Successfully disconnected"})
+        } catch (error) {
+            console.log(error)
+            res.status(500).send({message:"Where was a problem trying to log out"})
+        }
+    }
 }
 //asd
 module.exports = UserController
