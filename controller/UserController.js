@@ -9,12 +9,13 @@ const UserController = {
     async create(req,res,next){
         try {
             const password = bcrypt.hashSync(req.body.password,10);
+            console.log(password)
             const user = await User.create({
                 ...req.body,
                 password:password,
                 confirmed:false,
                 role:"user"
-            });
+            });//aqui falla
             const emailToken = jwt.sign({email:req.body.email},jwt_secret,{expiresIn:'48h'})
             const url = 'http://localhost:3000/users/confirm/'+emailToken
             await transporter.sendMail({
