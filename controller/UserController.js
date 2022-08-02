@@ -9,21 +9,20 @@ const UserController = {
     async create(req,res,next){
         try {
             const password = bcrypt.hashSync(req.body.password,10);
-            console.log(password)
             const user = await User.create({
                 ...req.body,
                 password:password,
-                confirmed:false,
+                confirmed:true,
                 role:"user"
-            });//aqui falla
-            const emailToken = jwt.sign({email:req.body.email},jwt_secret,{expiresIn:'48h'})
-            const url = 'http://localhost:3000/users/confirm/'+emailToken
-            await transporter.sendMail({
-                to:req.body.email,
-                subject:"Confirm you registration",
-                html:`<h3>Wellcome you are one step away from registering<h3>
-                <a href='${url}'>Click for confirm you registration<a>`,
             });
+            // const emailToken = jwt.sign({email:req.body.email},jwt_secret,{expiresIn:'48h'})
+            // const url = 'http://localhost:3000/users/confirm/'+emailToken
+            // await transporter.sendMail({
+            //     to:req.body.email,
+            //     subject:"Confirm you registration",
+            //     html:`<h3>Wellcome you are one step away from registering<h3>
+            //     <a href='${url}'>Click for confirm you registration<a>`,
+            // });
             res.status(201).send({message:"User created",user});
         } catch (error) {
             error.origin = 'User';

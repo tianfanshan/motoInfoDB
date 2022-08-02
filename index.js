@@ -1,6 +1,6 @@
 const express = require("express")
 const app = express()
-const port = 3000
+const PORT = 8000
 
 const { typeError } = require('./middleware/error')
 
@@ -11,4 +11,4 @@ app.use('/users',require('./router/users'));
 app.use(typeError)
 
 
-app.listen(port,()=>console.log('servidor levantado!'))
+app.listen(PORT,()=>console.log(`servidor levantado en el puerto ${PORT}!`))
